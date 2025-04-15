@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Tes Seberapa Tolol Kamu</title>
+  <style>
+    body {
+      background-color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      color: #e74c3c;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+    }
+    #hasil {
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+    #progress-container {
+      width: 80%;
+      height: 25px;
+      background-color: #ddd;
+      margin: 20px auto;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: #3498db;
+      transition: width 0.2s;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tes Seberapa Tolol dan Bodoh Kamu</h1>
+  <input type="text" id="namaInput" placeholder="Masukkan namamu...">
+  <br>
+  <button onclick="cekTolol()">Tes Sekarang</button>
+
+  <div id="hasil"></div>
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <script>
+    function cekTolol() {
+      const nama = document.getElementById('namaInput').value.trim();
+      const hasilEl = document.getElementById('hasil');
+      const bar = document.getElementById('progress-bar');
+
+      if (nama === "") {
+        alert("Masukkan nama terlebih dahulu!");
+        return;
+      }
+
+      const namaLower = nama.toLowerCase();
+      const khusus100 = ["akmal", "wisnu", "rian"];
+      let persenAkhir = 0;
+
+      if (namaLower === "zhuan") {
+        persenAkhir = 0;
+      } else if (khusus100.includes(namaLower)) {
+        persenAkhir = 100;
+      } else if (namaLower.charAt(0) === "a") {
+        persenAkhir = Math.floor(Math.random() * 6) + 95;
+      } else {
+        persenAkhir = Math.floor(Math.random() * 101);
+      }
+
+      let current = 0;
+      bar.style.width = "0%";
+      hasilEl.textContent = "";
+
+      const interval = setInterval(() => {
+        hasilEl.textContent = `${nama}, tingkat ketololanmu adalah ${current}%`;
+        bar.style.width = current + "%";
+        if (current >= persenAkhir) {
+          clearInterval(interval);
+        } else {
+          current++;
+        }
+      }, 20);
+    }
+  </script>
+</body>
+</html>
